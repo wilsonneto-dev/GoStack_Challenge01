@@ -32,7 +32,7 @@ app.post("/repositories", (request, response) => {
   const { title, url, techs } = request.body;
   const newRepository = { id: uuid(), title, url, techs, likes: 0 };
   repositories.push(newRepository);
-  response.json(newRepository);
+  return response.json(newRepository);
 });
 
 app.put("/repositories/:id", (request, response) => {
@@ -51,7 +51,7 @@ app.put("/repositories/:id", (request, response) => {
   const updatedRepository = { ...repository, title, url, techs };
   repositories[repositoryIndex] = repository;
 
-  response.json({ updatedRepository });
+  return response.json({ updatedRepository });
 });
 
 app.delete("/repositories/:id", (request, response) => {
@@ -66,7 +66,7 @@ app.delete("/repositories/:id", (request, response) => {
 
   repositories.splice(repositoryIndex, 1);
 
-  response.status(204).send();
+  return response.status(204).send();
 });
 
 app.post("/repositories/:id/like", (request, response) => {
@@ -84,7 +84,7 @@ app.post("/repositories/:id/like", (request, response) => {
   const updatedRepository = { ...repository, likes };
   repositories[repositoryIndex] = updatedRepository;
 
-  response.json({ updatedRepository });
+  return response.json({ updatedRepository });
 });
 
 module.exports = app;
