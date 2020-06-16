@@ -14,6 +14,20 @@ app.get("/repositories", (request, response) => {
   response.json(repositories);
 });
 
+app.get("/repositories/:id", (request, response) => {
+  const { id } = request.params;
+  const repositoryIndex = repositories.findIndex((item) => item.id === id);
+
+  if (repositoryIndex < 0) {
+    return response
+      .status(404)
+      .json({ success: false, message: "Repository not found" });
+  }
+
+  const repository = repositories[repositoryIndex];
+  return response.json(repository);
+});
+
 app.post("/repositories", (request, response) => {
   const { title, url, techs } = request.body;
   const newRepository = { id: uuid(), title, url, techs, likes: 0 };
