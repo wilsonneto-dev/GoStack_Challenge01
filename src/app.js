@@ -20,7 +20,7 @@ app.get("/repositories/:id", (request, response) => {
 
   if (repositoryIndex < 0) {
     return response
-      .status(404)
+      .status(400)
       .json({ success: false, message: "Repository not found" });
   }
 
@@ -41,7 +41,7 @@ app.put("/repositories/:id", (request, response) => {
 
   if (repositoryIndex < 0) {
     return response
-      .status(404)
+      .status(400)
       .json({ success: false, message: "Repository not found" });
   }
 
@@ -51,7 +51,7 @@ app.put("/repositories/:id", (request, response) => {
   const updatedRepository = { ...repository, title, url, techs };
   repositories[repositoryIndex] = repository;
 
-  return response.json({ updatedRepository });
+  return response.json(updatedRepository);
 });
 
 app.delete("/repositories/:id", (request, response) => {
@@ -60,7 +60,7 @@ app.delete("/repositories/:id", (request, response) => {
 
   if (repositoryIndex < 0) {
     return response
-      .status(404)
+      .status(400)
       .json({ success: false, message: "Repository not found" });
   }
 
@@ -75,7 +75,7 @@ app.post("/repositories/:id/like", (request, response) => {
 
   if (repositoryIndex < 0) {
     return response
-      .status(404)
+      .status(400)
       .json({ success: false, message: "Repository not found" });
   }
 
